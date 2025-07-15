@@ -1,10 +1,16 @@
+// src/pages/Dashboard.jsx
 import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 export default function Dashboard() {
   const [credit, setCredit] = useState(0);
   const [debit, setDebit] = useState(0);
   const [duesTotal, setDuesTotal] = useState(0);
   const [duesRemaining, setDuesRemaining] = useState(0);
+
+  const { logout } = useAuth();
+  const navigate = useNavigate();
 
   const status = credit - debit - duesRemaining;
   let statusColor = 'black';
@@ -20,15 +26,27 @@ export default function Dashboard() {
     setDuesRemaining(1000);
   }, []);
 
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
   return (
     <div>
-      <h2>Dashboard</h2>
+      <h2>User Dashboard</h2>
+      <nav>
+        <Link to="/accounts">Accounts</Link>
+        <Link to="/dues">Dues</Link>
+        <button onClick={handleLogout}>Logout</button>
+      </nav>
+
       <p>Total Credited: ₹{credit}</p>
       <p>Total Debited: ₹{debit}</p>
       <p>Remaining Balance: ₹{credit - debit}</p>
       <p>Total Dues: ₹{duesTotal}</p>
       <p>Remaining Dues: ₹{duesRemaining}</p>
       <p style={{ color: statusColor }}>Status: ₹{status}</p>
+
       <footer>
         <p>
           {status < 1000

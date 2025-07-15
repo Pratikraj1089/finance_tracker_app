@@ -1,3 +1,4 @@
+// src/components/Signup.jsx
 export default function Signup() {
   return (
     <div>

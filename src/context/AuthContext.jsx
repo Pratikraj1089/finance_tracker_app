@@ -1,3 +1,4 @@
+// src/context/AuthContext.jsx
 import { createContext, useContext, useState } from 'react';
 
 const AuthContext = createContext();
@@ -11,8 +12,13 @@ export const AuthProvider = ({ children }) => {
       credentials.password === 'admin123'
     ) {
       setUser({ username: 'admin', role: 'superadmin' });
+    } else if (
+      (credentials.username === 'user' || credentials.email === 'user@x.com') &&
+      credentials.password === 'user123'
+    ) {
+      setUser({ username: 'user', role: 'user' });
     } else {
-      setUser({ username: credentials.username, role: 'user' });
+      alert('Invalid credentials');
     }
   };
 

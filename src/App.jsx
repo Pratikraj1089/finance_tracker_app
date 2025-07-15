@@ -1,9 +1,11 @@
+// src/App.jsx
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Dashboard from './pages/Dashboard';
 import Accounts from './pages/Accounts';
 import Dues from './pages/Dues';
+import AccountDetails from './pages/AccountDetails';
 import AdminPanel from './pages/AdminPanel';
 import { useAuth } from './context/AuthContext';
 
@@ -20,6 +22,7 @@ export default function App() {
         <>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/accounts" element={<Accounts />} />
+          <Route path="/accounts/:id" element={<AccountDetails />} />
           <Route path="/dues" element={<Dues />} />
         </>
       )}
